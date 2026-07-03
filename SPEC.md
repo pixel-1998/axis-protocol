@@ -16,6 +16,8 @@ Multiple transformations compose:
 
 `S_n = T_n(T_{n-1}(...T_1(S_0)...))`
 
+…unless some `T_k` (k < n) terminates early — then `S_k`, not `S_n`, is the final result, and `T_{k+1}` through `T_n` never run.
+
 ## Invariants
 
 1. Every `Transform` receives a `State`.
@@ -23,8 +25,8 @@ Multiple transformations compose:
 3. The kernel never interprets the `State`.
 4. The kernel never knows the `Transform`.
 5. Any future technology must implement only: `State -> State`.
+6. A Transform may terminate the pipeline early by producing a final State instead of continuing composition. Remaining Transforms do not execute.
 
 ## Language Agnostic
 
-This specification does not depend on any programming language. 
-It is a contract that can be implemented in Python, Rust, C, Assembly, or any future language.
+This specification does not depend on any programming language. It is a contract that can be implemented in Python, Rust, C, Assembly, or any future language.
