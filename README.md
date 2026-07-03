@@ -4,14 +4,15 @@
 
 ## The Specification
 
+```
 State
-│
-▼
+   │
+   ▼
 Transform
-│
-▼
+   │
+   ▼
 State
-
+```
 
 Mathematically: **Sₙ₊₁ = T(Sₙ)**
 
@@ -19,9 +20,10 @@ Mathematically: **Sₙ₊₁ = T(Sₙ)**
 
 1. Every Transform receives a State.
 2. Every Transform returns a State.
-3. Axis never interprets the State.
-4. Axis never knows the Transform.
+3. The Kernel never interprets the State.
+4. The Kernel never knows the Transform.
 5. Any future technology must implement only: State -> State.
+6. A Transform may terminate the pipeline early by producing a final State instead of continuing composition. Remaining Transforms do not execute.
 
 ## Why This Exists
 
@@ -44,3 +46,8 @@ class MyTransform(Transform):
 axis = Axis()
 axis.use(MyTransform())
 final_state = axis.run({"start": True})
+```
+
+**For the formal specification, see [SPEC.md](SPEC.md).**
+
+No license. No restrictions. No permission needed.
