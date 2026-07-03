@@ -50,4 +50,4 @@ final_state = axis.run({"start": True})
 
 **For the formal specification, see [SPEC.md](SPEC.md).**
 
-No license. No restrictions. No permission needed.
+Licensed under the MIT License. See LICENSE for details.
