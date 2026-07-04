@@ -1,6 +1,6 @@
 # The Protocol is the Contract.
 # Everything else is implementation.
-# No permission needed. Use as you wish.
+# See LICENSE.
 
 from abc import ABC, abstractmethod
 from typing import Any, Dict
