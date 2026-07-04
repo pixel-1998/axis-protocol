@@ -35,6 +35,8 @@ That is what makes a protocol last.
 
 ## Use It
 
+### Basic pipeline
+
 ```python
 from axis import Axis, Transform
 
@@ -46,6 +48,27 @@ class MyTransform(Transform):
 axis = Axis()
 axis.use(MyTransform())
 final_state = axis.run({"start": True})
+```
+
+### Early termination (Law 6)
+
+```python
+from axis import Axis, Transform, StopPipeline
+
+class CheckLimit(Transform):
+    def __call__(self, state):
+        if state.get("rate_limited"):
+            raise StopPipeline(state)
+        return state
+
+class Process(Transform):
+    def __call__(self, state):
+        state["processed"] = True
+        return state
+
+axis = Axis().use(CheckLimit()).use(Process())
+result = axis.run({"rate_limited": True})   # Skips Process
+# result == {"rate_limited": True}
 ```
 
 **For the formal specification, see [SPEC.md](SPEC.md).**
